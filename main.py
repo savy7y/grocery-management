@@ -3,6 +3,7 @@ from tkinter import *
 import tkinter as tk
 from PIL import ImageTk,Image
 import tkintermapview
+import pandas as pd
 root = Tk()
 root.geometry("2560x1920")
 img = ImageTk.PhotoImage(Image.open("./content/CXm5S7.png"))
@@ -256,6 +257,22 @@ def switch1():
     pr2_window = my_Canvas.create_window(900,900, anchor="nw", window = pr2)
 
 
+def switch3():
+    df1 = pd.read_csv("./storage/data.csv", sep="@")
+    ln1 = []
+    ap = ""
+    for i in range(0,3):
+        if(i == 0):
+            ln1.append(name)
+        if(i==1):
+            ln1.append(count)
+        if(i==2):
+            ln1.append(sum)
+
+    df1.loc[len(df1.index)] = ln1
+    df1.to_csv("./storage/data.csv", sep="@")
+    
+
 def p2():
     item_list["h1"][2]=varch1.get()
     item_list["h1"][3]=varsch1.get()
@@ -300,7 +317,7 @@ def p2():
     my_Canvas.delete('all')
     my_Canvas.create_image(0, 0, image=img, anchor="nw")
     my_Canvas.create_line(960,0,960,1080, fill="yellow", width=5)
-    bnm = Button(root, text="Proceed", font="Arial 27 bold")
+    bnm = Button(root, text="Proceed", font="Arial 27 bold", command=switch3)
     bnm_window = my_Canvas.create_window(1400, 1000, anchor="nw" , window = bnm )
 
     bill()
@@ -328,11 +345,14 @@ def add_marker_event(coords):
 
 def bill():
     global sum
+    global count
+    count = 0
     sum = 0
     my_Canvas.create_text(400, 150, text="Your final bill", font="Arial 60 bold", fill="yellow")
     j = 0
     for i in item_list.values():
         if(i[2]==1):
+            count = count + i[3]
             j= j + 50
             sum = sum + i[1]*i[3]
             my_Canvas.create_text(440, 200+j, text=str(i[0])+"        Quantity : "+str(i[3]) + "          Net Amt=> " + str(i[1]*i[3]), font="Calibri 30", fill="white")
