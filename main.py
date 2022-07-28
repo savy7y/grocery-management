@@ -5,6 +5,7 @@ from PIL import ImageTk,Image
 import tkintermapview
 import pandas as pd
 root = Tk()
+root.title= "Krishn E-Grocery"
 root.geometry("2560x1920")
 img = ImageTk.PhotoImage(Image.open("./content/CXm5S7.png"))
 imggc = ImageTk.PhotoImage(Image.open("./content/gc.png"))
@@ -258,7 +259,7 @@ def switch1():
 
 
 def switch3():
-    df1 = pd.read_csv("./storage/data.csv", sep="@")
+    df1 = pd.read_csv("./storage/data.csv")
     ln1 = []
     ap = ""
     for i in range(0,3):
@@ -269,8 +270,15 @@ def switch3():
         if(i==2):
             ln1.append(sum)
 
-    df1.loc[len(df1.index)] = ln1
-    df1.to_csv("./storage/data.csv", sep="@")
+    print(ln1)
+    df1.loc[len(df1.index)]=ln1
+    df1.to_csv("./storage/data.csv")
+    my_Canvas.delete('all')
+    my_Canvas.create_image(0, 0, image=img, anchor="nw")
+    my_Canvas.create_text(960,500, text="HURRAY! YOUR ORDER HAS BEEN PLACED", font="Calibri 80 bold", fill="white")
+    pr33 = Button(root, text="Close this window", font="Arial 35 bold", command=root.destroy)
+    pr33_window = my_Canvas.create_window(750,900, anchor="nw", window = pr33)
+
     
 
 def p2():
