@@ -1,0 +1,45 @@
+from tkinter import *
+
+root= Tk()
+root.geometry("1920x1080")
+e=Entry(root, width=40, borderwidth=5, font="Arial 12")
+e.grid(row=1, column=1, columnspan=4)
+
+
+def myClick(number):
+    Maskc = e.get()
+    e.delete(0, END)
+    e.insert(0, Maskc+number)
+
+def myClickn(op):
+    Mask = e.get()
+    e.delete(0, END)
+    e.insert(0, Mask+op)
+def vale():
+    f = eval(e.get())
+    print(f)
+    f = str(f)
+    e.delete(0, END)  
+    e.insert(0, f)  
+def clear():
+    root.exit()
+    e.delete(0, END)
+
+B7 = Button(root, text="7", padx=40, pady=20, command= lambda: myClick("7") ).grid(column = 1, row =2)
+B8 = Button(root, text="8", padx=40, pady=20, command=lambda: myClick("8") ).grid(column = 2, row =2)
+B9 = Button(root, text="9", padx=40, pady=20,command=lambda: myClick("9") ).grid(column = 3, row =2)
+B4 = Button(root, text="4", padx=40, pady=20,command=lambda: myClick("4") ).grid(column = 1, row =3)
+B5 = Button(root, text="5", padx=40, pady=20,command=lambda: myClick("5") ).grid(column = 2, row =3)
+B6 = Button(root, text="6",padx=40, pady=20, command=lambda: myClick("6") ).grid(column = 3, row =3)
+B1 = Button(root, text="1", padx=40, pady=20,command=lambda: myClick("1") ).grid(column = 1, row =4)
+B2 = Button(root, text="2", padx=40, pady=20,command=lambda: myClick("2") ).grid(column = 2, row =4)
+B3 = Button(root, text="3", padx=40, pady=20,command=lambda: myClick("3") ).grid(column = 3, row =4)
+Bp = Button(root, text="+", padx=40, pady=20,command=lambda: myClickn("+") ).grid(column = 4, row =2)
+Bm = Button(root, text="-", padx=40, pady=20,command=lambda: myClickn("-") ).grid(column = 4, row =3)
+Bmu = Button(root, text="*", padx=40, pady=20,command=lambda: myClickn("*") ).grid(column = 4, row =4)
+Bd = Button(root, text="/", padx=40, pady=20,command=lambda: myClickn("/") ).grid(column = 4, row =5)
+Beq = Button(root, text="=", padx=40, pady=20,command=lambda: vale() ).grid(column = 1, row =5)
+B0 = Button(root, text="0", padx=40, pady=20,command=lambda: myClick("0") ).grid(column = 2, row =5)
+Bnthng = Button(root, text="clear", padx=40, pady=20, command=clear).grid(column = 3, row =5)
+
+root.mainloop()
