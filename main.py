@@ -4,6 +4,7 @@ import tkinter as tk
 from PIL import ImageTk,Image
 import tkintermapview
 import pandas as pd
+from csv import writer          
 root = Tk()
 root.title= "Krishn E-Grocery"
 root.geometry("2560x1920")
@@ -259,9 +260,8 @@ def switch1():
 
 
 def switch3():
-    df1 = pd.read_csv("./storage/data.csv")
-    ln1 = []
-    ap = ""
+
+    ln1=[]
     for i in range(0,3):
         if(i == 0):
             ln1.append(name)
@@ -271,8 +271,10 @@ def switch3():
             ln1.append(sum)
 
     print(ln1)
-    df1.loc[len(df1.index)]=ln1
-    df1.to_csv("./storage/data.csv")
+    with open('./storage/data.csv', 'a', newline='') as f_object: 
+        writer_object = writer(f_object)
+        writer_object.writerow(ln1)  
+        f_object.close()
     my_Canvas.delete('all')
     my_Canvas.create_image(0, 0, image=img, anchor="nw")
     my_Canvas.create_text(960,500, text="HURRAY! YOUR ORDER HAS BEEN PLACED", font="Calibri 80 bold", fill="white")
@@ -331,7 +333,7 @@ def p2():
     bill()
 
     my_Canvas.create_text(1400, 150, text="Delivery Info", font="Arial 60 bold", fill="yellow")
-    my_Canvas.create_text(1400, 250, text ="Costumer : "+ name, font="Arial 40 bold", fill="white")
+    my_Canvas.create_text(1400, 250, text ="Customer : "+ name, font="Arial 40 bold", fill="white")
     global map_widget
     map_widget = tkintermapview.TkinterMapView(root, width=800, height=600, corner_radius=0)
     map_widget.set_position(26.899377700349195, 75.73601841291928)
