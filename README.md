@@ -9,3 +9,5 @@ Pillow
 matplotlib
 pandas
 
+
+C:\Users\user\AppData\Local\Programs\Python\Python39\Lib\site-packages
