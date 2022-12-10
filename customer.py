@@ -80,6 +80,10 @@ def switch1():
     global varscs6 
     
     global name
+
+
+    
+
     name = e.get()
     my_Canvas.delete('all')
     my_Canvas.create_image(0, 0, image=img, anchor="nw")
@@ -257,6 +261,10 @@ def switch1():
 
     pr2 = Button(root, text="Proceed", font="Arial 20 bold", command=p2)
     pr2_window = my_Canvas.create_window(640,640, anchor="nw", window = pr2)
+
+    w2 = Toplevel()
+    w2.title("Product Information")
+    w2.geometry("250x500")
 
 
 def switch3():
